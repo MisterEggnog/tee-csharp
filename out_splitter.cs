@@ -1,7 +1,10 @@
 
+using System.Text;
+
 class TextOutSplitter : TextWriter {
+    public override Encoding Encoding => new System.Text.UTF8Encoding();
+
     TextOutSplitter() {
-        this.Encoding = new System.Text.UTF8Encoding();
     }
     
     public void write(char c) {
