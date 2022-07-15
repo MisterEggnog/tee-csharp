@@ -36,5 +36,10 @@ public class OutSplitterTest
 
 // If I could I would derive this from the null TextWriter.
 class TextWriterDisposeChecker : StringWriter {
-    public bool has_been_disposed { get; }
+    public bool has_been_disposed { get; set; }
+
+    protected override void Dispose(bool disposing) {
+        // No need to call super.dispose since StringWriter?
+        this.has_been_disposed = disposing;
+    }
 }
