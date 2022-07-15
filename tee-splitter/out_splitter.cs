@@ -10,6 +10,8 @@ public class TextOutSplitter : TextWriter {
     }
     
     public override void Write(char c) {
-        // TODO
+        foreach (var writer in writers) {
+            writer.Write(c);
+        }
     }
 }
