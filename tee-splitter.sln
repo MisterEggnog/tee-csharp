@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tee-splitter", "tee-splitter\tee-splitter.csproj", "{62F32F03-EE26-4A8C-9D47-75221AB80944}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -10,5 +12,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{62F32F03-EE26-4A8C-9D47-75221AB80944}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62F32F03-EE26-4A8C-9D47-75221AB80944}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62F32F03-EE26-4A8C-9D47-75221AB80944}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62F32F03-EE26-4A8C-9D47-75221AB80944}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
