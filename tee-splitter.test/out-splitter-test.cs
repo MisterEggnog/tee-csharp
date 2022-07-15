@@ -10,6 +10,10 @@ public class OutSplitterTest
         for (int i = 0; i < 10; i++) {
             string_writers.Add(new StringWriter());
         }
+        var generic_writers = new List<TextWriter>();
+        foreach (var s in string_writers) {
+            generic_writers.Add(s);
+        }
 
         foreach (var s in string_writers) {
             Assert.Equal(test_str, s.ToString());
