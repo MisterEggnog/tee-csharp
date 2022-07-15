@@ -25,3 +25,8 @@ public class OutSplitterTest
         }
     }
 }
+
+// If I could I would derive this from the null TextWriter.
+class TextWriterDisposeCheck : StringWriter {
+
+}
