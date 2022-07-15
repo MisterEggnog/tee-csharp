@@ -15,6 +15,11 @@ public class OutSplitterTest
             generic_writers.Add(s);
         }
 
+        var splitter = new TextOutSplitter(generic_writers);
+        for (int i = 0; i < test_str.Length; i++) {
+            splitter.Write(test_str[i]);
+        }
+
         foreach (var s in string_writers) {
             Assert.Equal(test_str, s.ToString());
         }
