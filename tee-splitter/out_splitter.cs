@@ -14,4 +14,13 @@ public class TextOutSplitter : TextWriter {
             writer.Write(c);
         }
     }
+
+    protected override void Dispose(bool disposing) {
+        if (disposing) {
+            foreach (var writer in writers) {
+                writer.Dispose();
+            }
+        }
+        GC.SuppressFinalize(this);
+    }
 }
