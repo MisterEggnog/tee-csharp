@@ -24,9 +24,17 @@ public class OutSplitterTest
             Assert.Equal(test_str, s.ToString());
         }
     }
+
+    [Fact]
+    public void dispose_checker_sets_bool() {
+        var dispose_checker = new TextWriterDisposeChecker();
+        Assert.False(dispose_checker.has_been_disposed);
+        dispose_checker.Dispose();
+        Assert.True(dispose_checker.has_been_disposed);
+    }
 }
 
 // If I could I would derive this from the null TextWriter.
-class TextWriterDisposeCheck : StringWriter {
+class TextWriterDisposeChecker : StringWriter {
     public bool has_been_disposed { get; }
 }
