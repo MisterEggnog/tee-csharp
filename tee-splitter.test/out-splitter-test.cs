@@ -26,6 +26,23 @@ public class OutSplitterTest
     }
 
     [Fact]
+    public void out_splitter_disposes_of_all_writers() {
+        var dispose_writers = new List<TextWriterDisposeChecker>();
+        for (int i = 0; i < 10; i++) {
+            dispose_writers.Add(new TextWriterDisposeChecker());
+        }
+        var writers = new List<TextWriter>();
+        foreach (var w in dispose_writers) {
+            writers.Add(w);
+        }
+        var splitter = new TextOutSplitter(writers);
+        splitter.Dispose();
+        foreach (var w in dispose_writers) {
+            Assert.True(w.has_been_disposed);
+        }
+    }
+
+    [Fact]
     public void dispose_checker_sets_bool() {
         var dispose_checker = new TextWriterDisposeChecker();
         Assert.False(dispose_checker.has_been_disposed);
