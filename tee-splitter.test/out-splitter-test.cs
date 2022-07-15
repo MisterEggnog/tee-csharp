@@ -1,6 +1,6 @@
 namespace tee_splitter.test;
 
-public class UnitTest1
+public class OutSplitterTest
 {
     [Fact]
     public void Test1()
