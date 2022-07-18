@@ -12,6 +12,8 @@ public class TextTransferPipe
 
     public void transfer()
     {
-        throw new NotImplementedException();
+        while (this.input.Peek() != -1) {
+            this.output.Write((char)this.input.Read());
+        }
     }
 }
