@@ -1,4 +1,4 @@
-namespace text_in_out_pipe.test;
+namespace tee_splitter.test;
 
 public class TextInOutPipeTest {
     [Fact]
