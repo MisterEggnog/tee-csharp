@@ -35,7 +35,7 @@ public class OutSplitterTest
         foreach (var w in dispose_writers) {
             writers.Add(w);
         }
-        var splitter = new TextOutSplitter(writers);
+        IDisposable splitter = new TextOutSplitter(writers);
         splitter.Dispose();
         foreach (var w in dispose_writers) {
             Assert.True(w.has_been_disposed);
