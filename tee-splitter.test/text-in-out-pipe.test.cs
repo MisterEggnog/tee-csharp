@@ -14,5 +14,10 @@ public class TextInOutPipeTest {
     [Fact]
     public void text_in_out_disposes_properly() {
         var dispose_out = new tee_splitter.test.WriterDisposeChecker();
+        var dispose_in = new tee_splitter.test.ReaderDisposeChecker();
+        var dispose_pipe = new TextTransferPipe(dispose_in, dispose_out);
+        dispose_pipe.dispose();
+        Assert.True(dispose_in.has_been_disposed);
+        Assert.True(dispose_out.has_been_disposed);
     }
 }

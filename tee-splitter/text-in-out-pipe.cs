@@ -1,5 +1,5 @@
 
-public class TextTransferPipe
+public class TextTransferPipe: IDisposable
 {
     private TextReader input;
     private TextWriter output;
@@ -15,5 +15,13 @@ public class TextTransferPipe
         while (this.input.Peek() != -1) {
             this.output.Write((char)this.input.Read());
         }
+    }
+
+    public void Dispose()
+    {
+        Dispose(disposing: true);
+    }
+
+    protected void Dispose(bool disposing) {
     }
 }
