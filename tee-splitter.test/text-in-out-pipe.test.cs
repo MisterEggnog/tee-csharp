@@ -13,6 +13,6 @@ public class TextInOutPipeTest {
 
     [Fact]
     public void text_in_out_disposes_properly() {
-        var dispose_out = new tee_splitter.test.TextWriterDisposeChecker();
+        var dispose_out = new tee_splitter.test.WriterDisposeChecker();
     }
 }

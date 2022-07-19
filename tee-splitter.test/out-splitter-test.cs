@@ -27,9 +27,9 @@ public class OutSplitterTest
 
     [Fact]
     public void out_splitter_disposes_of_all_writers() {
-        var dispose_writers = new List<TextWriterDisposeChecker>();
+        var dispose_writers = new List<WriterDisposeChecker>();
         for (int i = 0; i < 10; i++) {
-            dispose_writers.Add(new TextWriterDisposeChecker());
+            dispose_writers.Add(new WriterDisposeChecker());
         }
         var writers = new List<TextWriter>();
         foreach (var w in dispose_writers) {
@@ -44,7 +44,7 @@ public class OutSplitterTest
 
     [Fact]
     public void dispose_checker_sets_bool() {
-        var dispose_checker = new TextWriterDisposeChecker();
+        var dispose_checker = new WriterDisposeChecker();
         Assert.False(dispose_checker.has_been_disposed);
         dispose_checker.Dispose();
         Assert.True(dispose_checker.has_been_disposed);
