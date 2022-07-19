@@ -41,12 +41,4 @@ public class OutSplitterTest
             Assert.True(w.has_been_disposed);
         }
     }
-
-    [Fact]
-    public void dispose_checker_sets_bool() {
-        var dispose_checker = new WriterDisposeChecker();
-        Assert.False(dispose_checker.has_been_disposed);
-        dispose_checker.Dispose();
-        Assert.True(dispose_checker.has_been_disposed);
-    }
 }
