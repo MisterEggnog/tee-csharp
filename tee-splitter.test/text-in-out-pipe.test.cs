@@ -10,4 +10,9 @@ public class TextInOutPipeTest {
         pipe.transfer();
         Assert.Equal(test_string, output.ToString());
     }
+
+    [Fact]
+    public void text_in_out_disposes_properly() {
+        var dispose_out = new tee_splitter.test.TextWriterDisposeChecker();
+    }
 }
