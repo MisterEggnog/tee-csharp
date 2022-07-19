@@ -23,5 +23,7 @@ public class TextTransferPipe: IDisposable
     }
 
     protected void Dispose(bool disposing) {
+        this.input.Dispose();
+        this.output.Dispose();
     }
 }
