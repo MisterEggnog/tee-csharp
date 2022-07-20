@@ -9,8 +9,9 @@ public class TeeTest {
         Console.SetIn(str_in);
         Console.SetOut(str_out);
 
-        Tee.run(new List<String>());
+        var return_code = Tee.run(new List<String>());
 
         Assert.Equal(test_str, str_out.ToString());
+        Assert.Equal(0, return_code);
     }
 }
