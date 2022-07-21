@@ -14,4 +14,19 @@ public class TeeTest {
         Assert.Equal(test_str, str_out.ToString());
         Assert.Equal(0, return_code);
     }
+
+    [Fact]
+    public void tee_writes_to_all_output() {
+        const String test_str = "loasd\nuuuuuu\n90 2r dsf o\n888821304";
+        
+        var temp_files = new List<String>();
+        for (var i = 0; i < 10; i++) {
+            temp_files.Add(System.IO.Path.GetTempFileName());
+        }
+
+        // How I miss RAII
+        foreach (var f in temp_files) {
+            File.Delete(f);
+        }
+    }
 }
