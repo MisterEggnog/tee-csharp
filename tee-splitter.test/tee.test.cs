@@ -27,6 +27,13 @@ public class TeeTest {
         }
 
         try {
+            var stdin = new StringReader(test_str);
+            Console.SetIn(stdin);
+            Console.SetOut(TextWriter.Null);
+
+            var tee = Tee.run(temp_files);
+
+            Assert.Equal(0, tee);
             foreach (var f in temp_files) {
                 var text = File.ReadAllText(f);
                 Assert.Equal(test_str, text);
