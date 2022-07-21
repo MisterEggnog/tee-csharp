@@ -17,7 +17,9 @@ public class TeeTest {
 
     [Fact]
     public void tee_writes_to_all_output() {
-        const String test_str = "loasd\nuuuuuu\n90 2r dsf o\n888821304";
+        const String test_str = "Lorem ipsum dolor sit amet, consectetur adipiscing\n"
+        + "elit, sed do eiusmod tempor incididunt\n"
+        + "ut labore et dolore magna aliqua.";
         
         var temp_files = new List<String>();
         for (var i = 0; i < 10; i++) {
