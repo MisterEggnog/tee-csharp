@@ -26,15 +26,15 @@ public class TeeTest {
             temp_files.Add(System.IO.Path.GetTempFileName());
         }
 
-        // How I miss RAII
-        var write_results = new List<String>();
-        foreach (var f in temp_files) {
-            write_results.Add(File.ReadAllText(f));
-            File.Delete(f);
-        }
-
-        foreach (var res in write_results) {
-            Assert.Equal(test_str, res);
+        try {
+            foreach (var f in temp_files) {
+                var text = File.ReadAllText(f);
+                Assert.Equal(test_str, text);
+            }
+        } finally {
+            foreach (var f in temp_files) {
+                File.Delete(f);
+            }
         }
     }
 }
