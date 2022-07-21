@@ -27,8 +27,14 @@ public class TeeTest {
         }
 
         // How I miss RAII
+        var write_results = new List<String>();
         foreach (var f in temp_files) {
+            write_results.Add(File.ReadAllText(f));
             File.Delete(f);
+        }
+
+        foreach (var res in write_results) {
+            Assert.Equal(test_str, res);
         }
     }
 }
