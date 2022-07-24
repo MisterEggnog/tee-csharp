@@ -1,2 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿
+var files = new List<String>();
+var result = Tee.run(files);
+return result;
