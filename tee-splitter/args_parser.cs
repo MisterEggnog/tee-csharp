@@ -29,7 +29,7 @@ public class ArgsParser {
                 if (c == 'a')
                     this.append_ = true;
                 else if (c == 'i')
-                        this.ignore_signals_ = true;
+                    this.ignore_signals_ = true;
                 else
                     throw new InvalidArgument($"{c} is not a valid argument switch.");
                 }
