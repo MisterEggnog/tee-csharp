@@ -34,4 +34,11 @@ public class ArgsParserTester {
         var args_parse = new ArgsParser(args);
         Assert.True(args_parse.append);
     }
+
+    [Fact]
+    public void process_ignore_signal_arg() {
+        String[] args = {"-i"};
+        var args_parse = new ArgsParser(args);
+        Assert.True(args_parse.ignore_signals);
+    }
 }
