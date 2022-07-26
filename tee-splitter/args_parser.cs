@@ -29,8 +29,10 @@ public class ArgsParser {
                 var c = arg[i];
                 if (c == 'a')
                     this.append_ = true;
-                else if (c == 'i')
+                else if (c == 'i') {
                     this.ignore_signals_ = true;
+                    Console.Error.WriteLine("tee does not actually ignore signals");
+                }
                 else
                     throw new FormatException($"{c} (pos {i}) is not a valid argument switch.");
                 }
