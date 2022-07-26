@@ -27,4 +27,11 @@ public class ArgsParserTester {
         String[] args = {"-b"};
         Assert.Throws<InvalidArgument>(() => new ArgsParser(args));
     }
+
+    [Fact]
+    public void process_append_arg() {
+        String[] args = {"-a"};
+        var args_parse = new ArgsParser(args);
+        Assert.True(args_parse.append);
+    }
 }
