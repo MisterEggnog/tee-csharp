@@ -5,11 +5,9 @@ public class ArgsParser {
     public readonly bool ignore_signals;
 
     bool dash_dash, append_, ignore_signals_;
-    List<String> files_;
+    List<String> files_ = new List<String>();
 
     public ArgsParser(IReadOnlyList<String> args) {
-        this.files_ = new List<String>();
-
         foreach (var arg in args) {
             if (!dash_dash) {
                 this.check_switches(arg);
