@@ -25,6 +25,6 @@ public class ArgsParserTester {
     [Fact]
     public void throw_exception_for_invalid_switch() {
         String[] args = {"-b"};
-        Assert.Throws<InvalidArgument>() => new ArgsParser(args);
+        Assert.Throws<InvalidArgument>(() => new ArgsParser(args));
     }
 }
