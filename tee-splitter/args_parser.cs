@@ -32,7 +32,7 @@ public class ArgsParser {
                 else if (c == 'i')
                     this.ignore_signals_ = true;
                 else
-                    throw new FormatException($"{c} is not a valid argument switch.");
+                    throw new FormatException($"{c} (pos {i}) is not a valid argument switch.");
                 }
         } else {
             files_.Add(arg);
