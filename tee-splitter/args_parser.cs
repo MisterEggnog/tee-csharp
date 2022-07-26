@@ -22,15 +22,14 @@ public class ArgsParser {
     }
 
     void check_switches(string arg) {
-        if (arg[0] == '-') {
+        if (arg == "--") {
+            this.dash_dash = true;
+        } else if (arg[0] == '-') {
             foreach (var c in arg) {
                 if (c == 'a')
                     this.append_ = true;
                 else if (c == 'i')
                         this.ignore_signals_ = true;
-                else if (c == '-')
-                    // Hack
-                    this.dash_dash = true;
                 else
                     throw new InvalidArgument($"{c} is not a valid argument switch.");
                 }
