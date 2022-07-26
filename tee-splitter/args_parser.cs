@@ -4,33 +4,41 @@ public class ArgsParser {
     public readonly bool append;
     public readonly bool ignore_signals;
 
+    bool dash_dash, append_, ignore_signals_;
+    List<String> files_;
+
     public ArgsParser(IReadOnlyList<String> args) {
-        var files = new List<String>();
-        bool dash_dash = false;
+        this.files_ = new List<String>();
 
         foreach (var arg in args) {
             if (!dash_dash) {
-                if (arg[0] == '-') {
-                    foreach (var c in arg) {
-                        if (c == 'a')
-                            this.append = true;
-                        else if (c == 'i')
-                            this.ignore_signals = true;
-                        else if (c == '-')
-                            // Hack
-                            dash_dash = true;
-                        else
-                            throw new InvalidArgument($"{c} is not a valid argument switch.");
-                    }
-                } else {
-                    files.Add(arg);
-                }
+                this.check_switches(arg);
             } else {
-                files.Add(arg);
+                this.files_.Add(arg);
             }
         }
 
-        this.files = files;
+        this.files = this.files_;
+        this.append = this.append_;
+        this.ignore_signals = this.ignore_signals_;
+    }
+
+    void check_switches(string arg) {
+        if (arg[0] == '-') {
+            foreach (var c in arg) {
+                if (c == 'a')
+                    this.append_ = true;
+                else if (c == 'i')
+                        this.ignore_signals_ = true;
+                else if (c == '-')
+                    // Hack
+                    this.dash_dash = true;
+                else
+                    throw new InvalidArgument($"{c} is not a valid argument switch.");
+                }
+        } else {
+            files_.Add(arg);
+        }
     }
 }
 
