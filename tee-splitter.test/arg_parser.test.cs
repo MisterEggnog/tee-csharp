@@ -10,4 +10,15 @@ public class ArgsParserTester {
             Assert.Equal(args[i], arguments.files[i]);
         }
     }
+
+    [Fact]
+    public void args_parser_process_switches() {
+        String[] args = {"-a", "-i", "morb", "morbing"};
+        var arguments = new ArgsParser(args);
+
+        Assert.True(arguments.append);
+        Assert.True(arguments.ignore_signals);
+        Assert.Equal("morb", arguments.files[0]);
+        Assert.Equal("morbing", arguments.files[1]);
+    }
 }
