@@ -41,11 +41,3 @@ public class ArgsParser {
         }
     }
 }
-
-public class InvalidArgument: Exception {
-    public readonly string wrong_argument;
-    
-    public InvalidArgument(char c) {
-        this.wrong_argument = $"{c} is not a valid argument switch.";
-    }
-}
