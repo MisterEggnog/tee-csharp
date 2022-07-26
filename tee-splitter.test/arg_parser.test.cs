@@ -31,12 +31,7 @@ public class ArgsParserTester {
     [Fact]
     public void process_append_arg() {
         String[] args = {"-a"};
-        try {
-            var args_parse = new ArgsParser(args);
-            Assert.True(args_parse.append);
-        } catch (InvalidArgument e) {
-            Console.Error.WriteLine(e);
-            throw e;
-        }
+        var args_parse = new ArgsParser(args);
+        Assert.True(args_parse.append);
     }
 }
