@@ -25,7 +25,8 @@ public class ArgsParser {
         if (arg == "--") {
             this.dash_dash = true;
         } else if (arg[0] == '-') {
-            foreach (var c in arg) {
+            for (var i = 0; i < arg.Length; i++) {
+                var c = arg[i];
                 if (c == 'a')
                     this.append_ = true;
                 else if (c == 'i')
