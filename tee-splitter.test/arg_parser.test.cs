@@ -12,6 +12,13 @@ public class ArgsParserTester {
     }
 
     [Fact]
+    public void args_parser_permits_dashes_after_dash_dash() {
+        String[] args = {"--", "-belmont"};
+        var arguments = new ArgsParser(args);
+        Assert.Contains("-belmont", arguments.files);
+    }
+
+    [Fact]
     public void args_parser_process_switches() {
         String[] args = {"-a", "-i", "morb", "morbing"};
         var arguments = new ArgsParser(args);
