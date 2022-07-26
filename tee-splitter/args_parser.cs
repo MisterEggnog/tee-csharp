@@ -32,7 +32,7 @@ public class ArgsParser {
                 else if (c == 'i')
                     this.ignore_signals_ = true;
                 else
-                    throw new InvalidArgument(c);
+                    throw new FormatException($"{c} is not a valid argument switch.");
                 }
         } else {
             files_.Add(arg);
@@ -45,6 +45,5 @@ public class InvalidArgument: Exception {
     
     public InvalidArgument(char c) {
         this.wrong_argument = $"{c} is not a valid argument switch.";
-        Console.Error.WriteLine(wrong_argument);
     }
 }
