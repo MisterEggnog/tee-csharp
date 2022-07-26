@@ -3,6 +3,6 @@ public class ArgsParser {
     public readonly IReadOnlyList<String> files;
 
     public ArgsParser(IReadOnlyList<String> args) {
-        files = new List<String>();
+        files = args;
     }
 }
