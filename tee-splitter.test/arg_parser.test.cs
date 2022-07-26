@@ -21,4 +21,10 @@ public class ArgsParserTester {
         Assert.Equal("morb", arguments.files[0]);
         Assert.Equal("morbing", arguments.files[1]);
     }
+
+    [Fact]
+    public void throw_exception_for_invalid_switch() {
+        String[] args = {"-b"};
+        Assert.Throws<InvalidArgument>() => new ArgsParser(args);
+    }
 }
