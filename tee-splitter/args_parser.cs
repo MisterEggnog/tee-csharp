@@ -39,26 +39,30 @@ public class ArgsParser {
         } else if (arg[0] == '-') {
             for (var i = 1; i < arg.Length; i++) {
                 var c = arg[i];
-                switch (c) {
-                    case 'a':
-                        this.append_ = true;
-                        break;
-                    case 'i':
-                        this.ignore_signals_ = true;
-                        Console.Error.WriteLine("tee does not actually ignore signals");
-                        break;
-                    case 'v':
-                        this.version_info = true;
-                        break;
-                    case 'h':
-                        this.help_info = true;
-                        break;
-                    default:
-                        throw new FormatException($"{c} (pos {i}) is not a valid argument switch.");
-                }
+                this.check_short_switches(c, i);
             }
         } else {
             files_.Add(arg);
+        }
+    }
+
+    public void check_short_switches(char c, int str_pos) {
+        switch (c) {
+            case 'a':
+                this.append_ = true;
+                break;
+            case 'i':
+                this.ignore_signals_ = true;
+                Console.Error.WriteLine("tee does not actually ignore signals");
+                break;
+            case 'v':
+                this.version_info = true;
+                break;
+            case 'h':
+                this.help_info = true;
+                break;
+            default:
+                throw new FormatException($"{c} (pos {str_pos}) is not a valid argument switch.");
         }
     }
 }
