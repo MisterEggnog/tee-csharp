@@ -66,4 +66,22 @@ public class ArgsParserTester {
         var args_parse = new ArgsParser(args);
         Assert.Empty(args_parse.files);
     }
+
+    [Fact]
+    public void mark_help_info() {
+        String[] args = {"--help"};
+        var args_parse = new ArgsParser(args);
+        Assert.True(args_parse.print_help_info);
+
+        args[0] = "-h";
+        args_parse = new ArgsParser(args);
+        Assert.True(args_parse.print_help_info);
+    }
+
+    [Fact]
+    public void marking_help_info_blanks_files() {
+        String[] args = {"a", "b", "--help"};
+        var args_parse = new ArgsParser(args);
+        Assert.Empty(args_parse.files);
+    }
 }
