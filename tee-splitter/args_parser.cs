@@ -3,6 +3,7 @@ public class ArgsParser {
     public readonly IReadOnlyList<String> files;
     public readonly bool append;
     public readonly bool ignore_signals;
+    public readonly bool print_version_info;
 
     bool dash_dash, append_, ignore_signals_;
     List<String> files_ = new List<String>();

@@ -48,4 +48,15 @@ public class ArgsParserTester {
         var args_parse = new ArgsParser(args);
         Assert.True(args_parse.ignore_signals);
     }
+
+    [Fact]
+    public void mark_version_info() {
+        String[] args = {"--version"};
+        var args_parse = new ArgsParser(args);
+        Assert.True(args_parse.print_version_info);
+
+        args[0] = "-v";
+        args_parse = new ArgsParser(args);
+        Assert.True(args_parse.print_version_info);
+    }
 }
