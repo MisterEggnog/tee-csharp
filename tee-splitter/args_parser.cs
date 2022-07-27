@@ -18,13 +18,14 @@ public class ArgsParser {
             }
         }
 
-        if (!this.version_info) {
+        if (this.version_info || this.help_info) {
+            this.files = new List<String>();
+            this.print_version_info = this.version_info;
+            this.print_help_info = this.help_info;
+        } else {
             this.files = this.files_;
             this.append = this.append_;
             this.ignore_signals = this.ignore_signals_;
-        } else {
-            this.files = new List<String>();
-            this.print_version_info = this.version_info;
         }
     }
 
@@ -33,6 +34,8 @@ public class ArgsParser {
             this.dash_dash = true;
         } else if (arg == "--version") {
             this.version_info = true;
+        } else if (arg == "--help") {
+            this.help_info = true;
         } else if (arg[0] == '-') {
             for (var i = 1; i < arg.Length; i++) {
                 var c = arg[i];
@@ -43,6 +46,8 @@ public class ArgsParser {
                     Console.Error.WriteLine("tee does not actually ignore signals");
                 } else if (c == 'v')
                     this.version_info = true;
+                else if (c == 'h')
+                    this.help_info = true;
                 else
                     throw new FormatException($"{c} (pos {i}) is not a valid argument switch.");
                 }
