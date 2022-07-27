@@ -48,4 +48,40 @@ public class ArgsParserTester {
         var args_parse = new ArgsParser(args);
         Assert.True(args_parse.ignore_signals);
     }
+
+    [Fact]
+    public void mark_version_info() {
+        String[] args = {"--version"};
+        var args_parse = new ArgsParser(args);
+        Assert.True(args_parse.print_version_info);
+
+        args[0] = "-v";
+        args_parse = new ArgsParser(args);
+        Assert.True(args_parse.print_version_info);
+    }
+
+    [Fact]
+    public void marking_version_info_blanks_files() {
+        String[] args = {"a", "b", "--version"};
+        var args_parse = new ArgsParser(args);
+        Assert.Empty(args_parse.files);
+    }
+
+    [Fact]
+    public void mark_help_info() {
+        String[] args = {"--help"};
+        var args_parse = new ArgsParser(args);
+        Assert.True(args_parse.print_help_info);
+
+        args[0] = "-h";
+        args_parse = new ArgsParser(args);
+        Assert.True(args_parse.print_help_info);
+    }
+
+    [Fact]
+    public void marking_help_info_blanks_files() {
+        String[] args = {"a", "b", "--help"};
+        var args_parse = new ArgsParser(args);
+        Assert.Empty(args_parse.files);
+    }
 }
