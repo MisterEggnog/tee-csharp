@@ -59,4 +59,11 @@ public class ArgsParserTester {
         args_parse = new ArgsParser(args);
         Assert.True(args_parse.print_version_info);
     }
+
+    [Fact]
+    public void marking_version_info_blanks_files() {
+        String[] args = {"a", "b", "--version"};
+        var args_parse = new ArgsParser(args);
+        Assert.Empty(args_parse.files);
+    }
 }
