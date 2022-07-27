@@ -7,9 +7,8 @@ public class TeeTest {
 
     [Fact]
     public void tee_input_output_checking() {
-        var str_in = new StringReader(test_str);
+        simple_stdin_stdout();
         var str_out = new StringWriter();
-        Console.SetIn(str_in);
         Console.SetOut(str_out);
 
         var return_code = Tee.run(new List<String>());
