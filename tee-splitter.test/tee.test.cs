@@ -36,15 +36,14 @@ public class TeeTest {
                 Assert.Equal(test_str, text);
             }
         } finally {
-            foreach (var f in temp_files.files) {
-                File.Delete(f);
-            }
+            temp_files.Dispose();
         }
     }
 }
 
-class TempFileManger {
+class TempFileManger: IDisposable {
     public readonly IReadOnlyList<String> files;
+    bool has_been_disposed;
 
     public TempFileManger(int num) {
         var temp_files = new List<String>();
@@ -52,5 +51,17 @@ class TempFileManger {
             temp_files.Add(System.IO.Path.GetTempFileName());
         }
         this.files = temp_files;
+    }
+
+    public void Dispose() {
+        this.Dispose(true);
+    }
+
+    protected void Dispose(bool disposing) {
+        if (!this.has_been_disposed) {
+            foreach (var f in files)
+                File.Delete(f);
+            this.has_been_disposed = true;
+        }
     }
 }
