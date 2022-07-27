@@ -15,38 +15,42 @@ public class TeeTest {
         Assert.Equal(0, return_code);
     }
 
-    List<String> allocate_temp_files(int num) {
-        var temp_files = new List<String>();
-        for (var i = 0; i < 10; i++) {
-            temp_files.Add(System.IO.Path.GetTempFileName());
-        }
-        return temp_files;
-    }
-
     [Fact]
     public void tee_writes_to_all_output() {
         const String test_str = "Lorem ipsum dolor sit amet, consectetur adipiscing\n"
         + "elit, sed do eiusmod tempor incididunt\n"
         + "ut labore et dolore magna aliqua.";
         
-        var temp_files = allocate_temp_files(10);
+        var temp_files = new TempFileManger(10);
 
         try {
             var stdin = new StringReader(test_str);
             Console.SetIn(stdin);
             Console.SetOut(TextWriter.Null);
 
-            var tee = Tee.run(temp_files);
+            var tee = Tee.run(temp_files.files);
 
             Assert.Equal(0, tee);
-            foreach (var f in temp_files) {
+            foreach (var f in temp_files.files) {
                 var text = File.ReadAllText(f);
                 Assert.Equal(test_str, text);
             }
         } finally {
-            foreach (var f in temp_files) {
+            foreach (var f in temp_files.files) {
                 File.Delete(f);
             }
         }
+    }
+}
+
+class TempFileManger {
+    public readonly IReadOnlyList<String> files;
+
+    public TempFileManger(int num) {
+        var temp_files = new List<String>();
+        for (var i = 0; i < 10; i++) {
+            temp_files.Add(System.IO.Path.GetTempFileName());
+        }
+        this.files = temp_files;
     }
 }
