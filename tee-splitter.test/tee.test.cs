@@ -21,9 +21,7 @@ public class TeeTest {
     [Fact]
     public void tee_writes_to_all_output() {
         using (var temp_files = new TempFileManger(10)) {
-            var stdin = new StringReader(test_str);
-            Console.SetIn(stdin);
-            Console.SetOut(TextWriter.Null);
+            simple_stdin_stdout();
 
             var tee = Tee.run(temp_files.files);
 
@@ -33,6 +31,14 @@ public class TeeTest {
                 Assert.Equal(test_str, text);
             }
         }
+    }
+
+    /// stdin is test_str
+    /// stdout goes to /dev/null
+    void simple_stdin_stdout() {
+        var stdin = new StringReader(test_str);
+        Console.SetIn(stdin);
+        Console.SetOut(TextWriter.Null);
     }
 }
 
