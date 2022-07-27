@@ -16,7 +16,7 @@ public class ArgsParser {
                 this.files_.Add(arg);
             }
         }
-        
+
         if (!this.version_info) {
             this.files = this.files_;
             this.append = this.append_;
@@ -30,7 +30,7 @@ public class ArgsParser {
     void check_switches(string arg) {
         if (arg == "--") {
             this.dash_dash = true;
-        } else if (arg == "--version" || arg == "-v") {
+        } else if (arg == "--version") {
             this.version_info = true;
         } else if (arg[0] == '-') {
             for (var i = 1; i < arg.Length; i++) {
@@ -40,7 +40,8 @@ public class ArgsParser {
                 else if (c == 'i') {
                     this.ignore_signals_ = true;
                     Console.Error.WriteLine("tee does not actually ignore signals");
-                }
+                } else if (c == 'v')
+                    this.version_info = true;
                 else
                     throw new FormatException($"{c} (pos {i}) is not a valid argument switch.");
                 }
