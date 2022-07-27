@@ -1,5 +1,10 @@
 
 public class Tee {
+    ArgsParser args;
+
+    public Tee(ArgsParser args) {
+        this.args = args;
+    }
 
     static List<TextWriter> open_files(IReadOnlyCollection<String> files) {
         var open_files = new List<TextWriter>();
@@ -7,6 +12,10 @@ public class Tee {
             open_files.Add(new StreamWriter(s, false, System.Text.Encoding.UTF8));
         }
         return open_files;
+    }
+
+    public int run() {
+        throw new NotImplementedException();
     }
 
     public static int run(IReadOnlyCollection<String> files) {

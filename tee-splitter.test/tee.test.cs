@@ -32,6 +32,23 @@ public class TeeTest {
         }
     }
 
+    [Fact]
+    public void writes_files_when_given_args() {
+        simple_stdin_stdout();
+
+        using (var temp_files = new TempFileManger(5)) {
+            var arg_list = new List<String>(temp_files.files);
+            var args = new ArgsParser(arg_list);
+            var tee = new Tee(args);
+            
+            Assert.Equal(0, tee.run());
+            foreach (var f in temp_files.files) {
+                var text = File.ReadAllText(f);
+                Assert.Equal(test_str, text);
+            }
+        }
+    }
+
     /// stdin is test_str
     /// stdout goes to /dev/null
     void simple_stdin_stdout() {
