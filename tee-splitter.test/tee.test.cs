@@ -15,16 +15,21 @@ public class TeeTest {
         Assert.Equal(0, return_code);
     }
 
+    List<String> allocate_temp_files(int num) {
+        var temp_files = new List<String>();
+        for (var i = 0; i < 10; i++) {
+            temp_files.Add(System.IO.Path.GetTempFileName());
+        }
+        return temp_files;
+    }
+
     [Fact]
     public void tee_writes_to_all_output() {
         const String test_str = "Lorem ipsum dolor sit amet, consectetur adipiscing\n"
         + "elit, sed do eiusmod tempor incididunt\n"
         + "ut labore et dolore magna aliqua.";
         
-        var temp_files = new List<String>();
-        for (var i = 0; i < 10; i++) {
-            temp_files.Add(System.IO.Path.GetTempFileName());
-        }
+        var temp_files = allocate_temp_files(10);
 
         try {
             var stdin = new StringReader(test_str);
