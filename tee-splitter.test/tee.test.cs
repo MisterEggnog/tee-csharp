@@ -25,10 +25,7 @@ public class TeeTest {
             var tee = Tee.run(temp_files.files);
 
             Assert.Equal(0, tee);
-            foreach (var f in temp_files.files) {
-                var text = File.ReadAllText(f);
-                Assert.Equal(test_str, text);
-            }
+            test_file_outputs(temp_files.files, test_str);
         }
     }
 
@@ -42,10 +39,7 @@ public class TeeTest {
             var tee = new Tee(args);
             
             Assert.Equal(0, tee.run());
-            foreach (var f in temp_files.files) {
-                var text = File.ReadAllText(f);
-                Assert.Equal(test_str, text);
-            }
+            test_file_outputs(temp_files.files, test_str);
         }
     }
 
@@ -55,6 +49,13 @@ public class TeeTest {
         var stdin = new StringReader(test_str);
         Console.SetIn(stdin);
         Console.SetOut(TextWriter.Null);
+    }
+
+    void test_file_outputs(IReadOnlyList<String> files, String test_str) {
+        foreach (var f in files) {
+            var text = File.ReadAllText(f);
+            Assert.Equal(test_str, text);
+        }
     }
 }
 
