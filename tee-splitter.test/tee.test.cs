@@ -21,9 +21,7 @@ public class TeeTest {
         + "elit, sed do eiusmod tempor incididunt\n"
         + "ut labore et dolore magna aliqua.";
         
-        var temp_files = new TempFileManger(10);
-
-        try {
+        using (var temp_files = new TempFileManger(10)) {
             var stdin = new StringReader(test_str);
             Console.SetIn(stdin);
             Console.SetOut(TextWriter.Null);
@@ -35,8 +33,6 @@ public class TeeTest {
                 var text = File.ReadAllText(f);
                 Assert.Equal(test_str, text);
             }
-        } finally {
-            temp_files.Dispose();
         }
     }
 }
