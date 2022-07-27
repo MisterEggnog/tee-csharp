@@ -1,6 +1,10 @@
 namespace tee_splitter.test;
 
 public class TeeTest {
+    const String test_str = "Lorem ipsum dolor sit amet, consectetur adipiscing\n"
+        + "elit, sed do eiusmod tempor incididunt\n"
+        + "ut labore et dolore magna aliqua.";
+
     [Fact]
     public void tee_input_output_checking() {
         const String test_str = "Waku waku.\nEEEEE\nRawr\n\n";
@@ -17,10 +21,6 @@ public class TeeTest {
 
     [Fact]
     public void tee_writes_to_all_output() {
-        const String test_str = "Lorem ipsum dolor sit amet, consectetur adipiscing\n"
-        + "elit, sed do eiusmod tempor incididunt\n"
-        + "ut labore et dolore magna aliqua.";
-        
         using (var temp_files = new TempFileManger(10)) {
             var stdin = new StringReader(test_str);
             Console.SetIn(stdin);
