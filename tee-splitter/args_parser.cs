@@ -5,7 +5,7 @@ public class ArgsParser {
     public readonly bool ignore_signals;
     public readonly bool print_version_info;
 
-    bool dash_dash, append_, ignore_signals_;
+    bool dash_dash, append_, ignore_signals_, version_info;
     List<String> files_ = new List<String>();
 
     public ArgsParser(IReadOnlyList<String> args) {
@@ -16,15 +16,22 @@ public class ArgsParser {
                 this.files_.Add(arg);
             }
         }
-
-        this.files = this.files_;
-        this.append = this.append_;
-        this.ignore_signals = this.ignore_signals_;
+        
+        if (!this.version_info) {
+            this.files = this.files_;
+            this.append = this.append_;
+            this.ignore_signals = this.ignore_signals_;
+        } else {
+            this.files = new List<String>();
+            this.print_version_info = this.version_info;
+        }
     }
 
     void check_switches(string arg) {
         if (arg == "--") {
             this.dash_dash = true;
+        } else if (arg == "--version" || arg == "-v") {
+            this.version_info = true;
         } else if (arg[0] == '-') {
             for (var i = 1; i < arg.Length; i++) {
                 var c = arg[i];
