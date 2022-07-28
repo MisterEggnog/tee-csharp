@@ -69,6 +69,11 @@ public class TeeTest {
         good_exit_code_and_no_output("--help");
     }
 
+    [Fact]
+    public void writes_version_message() {
+        good_exit_code_and_no_output("--version");
+    }
+
     /// stdin is test_str
     /// stdout goes to /dev/null
     void simple_stdin_stdout() {
