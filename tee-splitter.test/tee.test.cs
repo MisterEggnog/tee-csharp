@@ -66,17 +66,17 @@ public class TeeTest {
 
     [Fact]
     public void writes_help_message() {
-        good_exit_code_and_no_output("--help");
+        good_exit_code_non_empty_output("--help");
     }
 
     [Fact]
     public void writes_version_message() {
-        good_exit_code_and_no_output("--version");
+        good_exit_code_non_empty_output("--version");
     }
 
     [Fact]
     public void writes_license_message() {
-        good_exit_code_and_no_output("--license");
+        good_exit_code_non_empty_output("--license");
     }
 
     /// stdin is test_str
@@ -94,7 +94,7 @@ public class TeeTest {
         }
     }
 
-    void good_exit_code_and_no_output(String arg) {
+    void good_exit_code_non_empty_output(String arg) {
         var stdout = new StringWriter();
 
         Console.SetIn(TextReader.Null);
