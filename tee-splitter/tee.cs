@@ -32,6 +32,11 @@ public class Tee {
             Console.WriteLine(meta.version_str());
             return 0;
         }
+        if (this.args.print_license_info) {
+            var meta = new ProgramMetadata();
+            Console.WriteLine(meta.license_str());
+            return 0;
+        }
 
         // Why isn't there no disposable ReadOnlyCollection?
         var open_files = this.open_files(args.files, this.args.append);
