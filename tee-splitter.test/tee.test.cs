@@ -66,15 +66,7 @@ public class TeeTest {
 
     [Fact]
     public void writes_help_message() {
-        var stdout = new StringWriter();
-
-        Console.SetIn(TextReader.Null);
-        Console.SetOut(stdout);
-
-        var args = new ArgsParser(new String[] {"--help"});
-        var tee = new Tee(args);
-        Assert.Equal(0, tee.run());
-        Assert.NotEqual(0, stdout.ToString().Length);
+        good_exit_code_and_no_output("--help");
     }
 
     /// stdin is test_str
@@ -90,6 +82,18 @@ public class TeeTest {
             var text = File.ReadAllText(f);
             Assert.Equal(test_str, text);
         }
+    }
+
+    void good_exit_code_and_no_output(String arg) {
+        var stdout = new StringWriter();
+
+        Console.SetIn(TextReader.Null);
+        Console.SetOut(stdout);
+
+        var args = new ArgsParser(new String[] {arg});
+        var tee = new Tee(args);
+        Assert.Equal(0, tee.run());
+        Assert.NotEqual(0, stdout.ToString().Length);
     }
 }
 
