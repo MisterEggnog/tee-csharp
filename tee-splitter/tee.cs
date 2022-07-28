@@ -2,6 +2,9 @@
 public class Tee {
     ArgsParser args;
 
+    // TODO Write actual help string
+    const String help_message = "aaaa";
+
     public Tee(ArgsParser args) {
         this.args = args;
     }
@@ -20,6 +23,11 @@ public class Tee {
     }
 
     public int run() {
+        if (this.args.print_help_info) {
+            Console.WriteLine(help_message);
+            return 0;
+        }
+
         // Why isn't there no disposable ReadOnlyCollection?
         var open_files = this.open_files(args.files, this.args.append);
         try {
