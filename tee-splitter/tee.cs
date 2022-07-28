@@ -6,6 +6,11 @@ public class Tee {
         this.args = args;
     }
 
+    public Tee(IReadOnlyCollection<String> files) {
+        var as_array = new List<String>(files);
+        this.args = new ArgsParser(as_array);
+    }
+
     static List<TextWriter> open_files(IReadOnlyCollection<String> files) {
         var open_files = new List<TextWriter>();
         foreach (var s in files) {
