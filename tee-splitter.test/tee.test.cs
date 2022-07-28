@@ -64,6 +64,19 @@ public class TeeTest {
         }
     }
 
+    [Fact]
+    public void writes_help_message() {
+        var stdout = new StringWriter();
+
+        Console.SetIn(TextReader.Null);
+        Console.SetOut(stdout);
+
+        var args = new ArgsParser(new String[] {"--help"});
+        var tee = new Tee(args);
+        Assert.Equal(0, tee.run());
+        Assert.NotEqual(0, stdout.ToString().Length);
+    }
+
     /// stdin is test_str
     /// stdout goes to /dev/null
     void simple_stdin_stdout() {
