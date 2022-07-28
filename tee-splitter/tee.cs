@@ -21,7 +21,7 @@ public class Tee {
 
     public int run() {
         // Why isn't there no disposable ReadOnlyCollection?
-        var open_files = this.open_files(args.files, true);
+        var open_files = this.open_files(args.files, this.args.append);
         try {
             open_files.Add(Console.Out);
             using (var output_splitter = new TextOutSplitter(open_files)) {
