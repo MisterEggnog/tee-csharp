@@ -43,6 +43,27 @@ public class TeeTest {
         }
     }
 
+    [Fact]
+    public void append_to_files() {
+        simple_stdin_stdout();
+
+        using (var temp_files = new TempFileManger(5)) {
+            foreach (var file in temp_files.files) {
+                var ofs = new StreamWriter(file);
+                ofs.Write(test_str);
+                ofs.Dispose();
+            }
+
+            var arg_list = new List<String>(temp_files.files);
+            arg_list.Add("-a");
+            var args = new ArgsParser(arg_list);
+            var tee = new Tee(args);
+
+            Assert.Equal(0, tee.run());
+            test_file_outputs(temp_files.files, test_str + test_str);
+        }
+    }
+
     /// stdin is test_str
     /// stdout goes to /dev/null
     void simple_stdin_stdout() {
