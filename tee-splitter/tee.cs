@@ -11,17 +11,17 @@ public class Tee {
         this.args = new ArgsParser(as_array);
     }
 
-    List<TextWriter> open_files(IReadOnlyCollection<String> files) {
+    List<TextWriter> open_files(IReadOnlyCollection<String> files, bool append) {
         var open_files = new List<TextWriter>();
         foreach (var s in files) {
-            open_files.Add(new StreamWriter(s, false, System.Text.Encoding.UTF8));
+            open_files.Add(new StreamWriter(s, append, System.Text.Encoding.UTF8));
         }
         return open_files;
     }
 
     public int run() {
         // Why isn't there no disposable ReadOnlyCollection?
-        var open_files = this.open_files(args.files);
+        var open_files = this.open_files(args.files, true);
         try {
             open_files.Add(Console.Out);
             using (var output_splitter = new TextOutSplitter(open_files)) {
