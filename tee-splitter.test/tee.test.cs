@@ -11,7 +11,7 @@ public class TeeTest {
         var str_out = new StringWriter();
         Console.SetOut(str_out);
 
-        var return_code = Tee.run(new List<String>());
+        var return_code = new Tee(new List<String>()).run();
 
         Assert.Equal(test_str, str_out.ToString());
         Assert.Equal(0, return_code);
@@ -22,7 +22,7 @@ public class TeeTest {
         using (var temp_files = new TempFileManger(10)) {
             simple_stdin_stdout();
 
-            var tee = Tee.run(temp_files.files);
+            var tee = new Tee(temp_files.files).run();
 
             Assert.Equal(0, tee);
             test_file_outputs(temp_files.files, test_str);
