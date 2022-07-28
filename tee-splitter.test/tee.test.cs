@@ -74,6 +74,11 @@ public class TeeTest {
         good_exit_code_and_no_output("--version");
     }
 
+    [Fact]
+    public void writes_license_message() {
+        good_exit_code_and_no_output("--license");
+    }
+
     /// stdin is test_str
     /// stdout goes to /dev/null
     void simple_stdin_stdout() {
