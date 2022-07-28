@@ -20,12 +20,18 @@ public class Tee {
     }
 
     public int run() {
+        // Why isn't there no disposable ReadOnlyCollection?
         var open_files = this.open_files(args.files);
-        open_files.Add(Console.Out);
-        var output_splitter = new TextOutSplitter(open_files);
-        var pipe = new TextTransferPipe(Console.In, output_splitter);
-        pipe.transfer();
-        pipe.Dispose();
+        try {
+            open_files.Add(Console.Out);
+            using (var output_splitter = new TextOutSplitter(open_files)) {
+                var pipe = new TextTransferPipe(Console.In, output_splitter);
+                pipe.transfer();
+            }
+        } finally {
+            foreach (var f in open_files)
+                f.Dispose();
+        }
 
         return 0;
     }
