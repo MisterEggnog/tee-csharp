@@ -29,9 +29,4 @@ public class Tee {
 
         return 0;
     }
-
-    public static int run(IReadOnlyCollection<String> files) {
-        var tee = new Tee(files);
-        return tee.run();
-    }
 }
