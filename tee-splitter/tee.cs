@@ -4,8 +4,6 @@ public class Tee {
 
     // TODO Write actual help string
     const String help_message = "aaaa";
-    // TODO Write actual version string
-    const String version_message = "bbbb";
 
     public Tee(ArgsParser args) {
         this.args = args;
@@ -30,7 +28,8 @@ public class Tee {
             return 0;
         }
         if (this.args.print_version_info) {
-            Console.WriteLine(version_message);
+            var meta = new ProgramMetadata();
+            Console.WriteLine(meta.version_str());
             return 0;
         }
 
