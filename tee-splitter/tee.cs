@@ -11,7 +11,7 @@ public class Tee {
         this.args = new ArgsParser(as_array);
     }
 
-    static List<TextWriter> open_files(IReadOnlyCollection<String> files) {
+    List<TextWriter> open_files(IReadOnlyCollection<String> files) {
         var open_files = new List<TextWriter>();
         foreach (var s in files) {
             open_files.Add(new StreamWriter(s, false, System.Text.Encoding.UTF8));
@@ -20,11 +20,7 @@ public class Tee {
     }
 
     public int run() {
-        throw new NotImplementedException();
-    }
-
-    public static int run(IReadOnlyCollection<String> files) {
-        var open_files = Tee.open_files(files);
+        var open_files = this.open_files(args.files);
         open_files.Add(Console.Out);
         var output_splitter = new TextOutSplitter(open_files);
         var pipe = new TextTransferPipe(Console.In, output_splitter);
@@ -32,5 +28,10 @@ public class Tee {
         pipe.Dispose();
 
         return 0;
+    }
+
+    public static int run(IReadOnlyCollection<String> files) {
+        var tee = new Tee(files);
+        return tee.run();
     }
 }
