@@ -5,6 +5,7 @@ public class ArgsParser {
     public readonly bool ignore_signals;
     public readonly bool print_version_info;
     public readonly bool print_help_info;
+    public readonly bool print_license_info;
 
     bool dash_dash, append_, ignore_signals_, version_info, help_info;
     List<String> files_ = new List<String>();

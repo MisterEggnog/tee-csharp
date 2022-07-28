@@ -79,6 +79,13 @@ public class ArgsParserTester {
     }
 
     [Fact]
+    public void mark_license_info() {
+        String[] args = {"--license"};
+        var args_parse = new ArgsParser(args);
+        Assert.True(args_parse.print_license_info);
+    }
+
+    [Fact]
     public void marking_help_info_blanks_files() {
         String[] args = {"a", "b", "--help"};
         var args_parse = new ArgsParser(args);
