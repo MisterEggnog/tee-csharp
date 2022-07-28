@@ -11,7 +11,7 @@ public class TeeTest {
         var str_out = new StringWriter();
         Console.SetOut(str_out);
 
-        var return_code = Tee.run(new List<String>());
+        var return_code = new Tee(new List<String>()).run();
 
         Assert.Equal(test_str, str_out.ToString());
         Assert.Equal(0, return_code);
@@ -22,14 +22,56 @@ public class TeeTest {
         using (var temp_files = new TempFileManger(10)) {
             simple_stdin_stdout();
 
-            var tee = Tee.run(temp_files.files);
+            var tee = new Tee(temp_files.files).run();
 
             Assert.Equal(0, tee);
-            foreach (var f in temp_files.files) {
-                var text = File.ReadAllText(f);
-                Assert.Equal(test_str, text);
-            }
+            test_file_outputs(temp_files.files, test_str);
         }
+    }
+
+    [Fact]
+    public void writes_files_when_given_args() {
+        simple_stdin_stdout();
+
+        using (var temp_files = new TempFileManger(5)) {
+            var arg_list = new List<String>(temp_files.files);
+            var args = new ArgsParser(arg_list);
+            var tee = new Tee(args);
+            
+            Assert.Equal(0, tee.run());
+            test_file_outputs(temp_files.files, test_str);
+        }
+    }
+
+    [Fact]
+    public void append_to_files() {
+        simple_stdin_stdout();
+
+        using (var temp_files = new TempFileManger(5)) {
+            foreach (var file in temp_files.files) {
+                var ofs = new StreamWriter(file);
+                ofs.Write(test_str);
+                ofs.Dispose();
+            }
+
+            var arg_list = new List<String>(temp_files.files);
+            arg_list.Add("-a");
+            var args = new ArgsParser(arg_list);
+            var tee = new Tee(args);
+
+            Assert.Equal(0, tee.run());
+            test_file_outputs(temp_files.files, test_str + test_str);
+        }
+    }
+
+    [Fact]
+    public void writes_help_message() {
+        good_exit_code_and_no_output("--help");
+    }
+
+    [Fact]
+    public void writes_version_message() {
+        good_exit_code_and_no_output("--version");
     }
 
     /// stdin is test_str
@@ -38,6 +80,25 @@ public class TeeTest {
         var stdin = new StringReader(test_str);
         Console.SetIn(stdin);
         Console.SetOut(TextWriter.Null);
+    }
+
+    void test_file_outputs(IReadOnlyList<String> files, String test_str) {
+        foreach (var f in files) {
+            var text = File.ReadAllText(f);
+            Assert.Equal(test_str, text);
+        }
+    }
+
+    void good_exit_code_and_no_output(String arg) {
+        var stdout = new StringWriter();
+
+        Console.SetIn(TextReader.Null);
+        Console.SetOut(stdout);
+
+        var args = new ArgsParser(new String[] {arg});
+        var tee = new Tee(args);
+        Assert.Equal(0, tee.run());
+        Assert.NotEqual(0, stdout.ToString().Length);
     }
 }
 

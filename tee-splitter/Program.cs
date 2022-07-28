@@ -1,4 +1,4 @@
 ﻿
-var files = new List<String>();
-var result = Tee.run(files);
+var parsed_args = new ArgsParser(args);
+var result = new Tee(parsed_args).run();
 return result;
