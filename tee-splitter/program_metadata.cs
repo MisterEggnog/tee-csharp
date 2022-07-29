@@ -12,7 +12,24 @@ public class ProgramMetadata {
     }
 
     public String help_str() {
-        return "";
+        // Based on output from rust clap.
+        var msg =
+        "tee 0.1.0\n" +
+        "Read from stdin then writes to stdin & listed files.\n" +
+        "\n" +
+        "Warning, currently ignore signals does nothing.\n" +
+        "USAGE:\n" +
+        "    tee [OPTIONS] [FILES]...\n" +
+        "\n" +
+        "ARGS:\n" +
+        "    <FILES>...    Write to files\n" +
+        "\n" +
+        "OPTIONS:\n" +
+        "    -a               Append\n" +
+        "    -i               Ignore signals\n" +
+        "        --license    License\n" +
+        "    -V, --version    Print version information";
+        return msg;
     }
 
     public String license_str() {
