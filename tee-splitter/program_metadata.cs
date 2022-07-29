@@ -11,6 +11,10 @@ public class ProgramMetadata {
         return msg;
     }
 
+    public String help_str() {
+        return "";
+    }
+
     public String license_str() {
         var msg =
             "Copyright (C) 2022 Josiah Baldwin\n" +
