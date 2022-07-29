@@ -5,8 +5,9 @@ public class ArgsParser {
     public readonly bool ignore_signals;
     public readonly bool print_version_info;
     public readonly bool print_help_info;
+    public readonly bool print_license_info;
 
-    bool dash_dash, append_, ignore_signals_, version_info, help_info;
+    bool dash_dash, append_, ignore_signals_, version_info, help_info, license_info;
     List<String> files_ = new List<String>();
 
     public ArgsParser(IReadOnlyList<String> args) {
@@ -18,10 +19,11 @@ public class ArgsParser {
             }
         }
 
-        if (this.version_info || this.help_info) {
+        if (this.version_info || this.help_info || this.license_info) {
             this.files = new List<String>();
             this.print_version_info = this.version_info;
             this.print_help_info = this.help_info;
+            this.print_license_info = this.license_info;
         } else {
             this.files = this.files_;
             this.append = this.append_;
@@ -36,6 +38,8 @@ public class ArgsParser {
             this.version_info = true;
         } else if (arg == "--help") {
             this.help_info = true;
+        } else if (arg == "--license") {
+            this.license_info = true;
         } else if (arg[0] == '-') {
             for (var i = 1; i < arg.Length; i++) {
                 var c = arg[i];
